@@ -36,6 +36,8 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
+import { UnifiedThemeProvider } from '@backstage/theme';
+import { pathfinderTheme } from './theme';
 
 const app = createApp({
   apis,
@@ -59,6 +61,14 @@ const app = createApp({
   components: {
     SignInPage: props => <SignInPage {...props} auto providers={['guest']} />,
   },
+  themes: [{
+    id: 'pathfinder-theme',
+    title: 'Pathfinder Theme',
+    variant: 'light',
+    Provider: ({ children }) => (
+      <UnifiedThemeProvider theme={pathfinderTheme} children={children} />
+    ),
+  }]
 });
 
 const routes = (
